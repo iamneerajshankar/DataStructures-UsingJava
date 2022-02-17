@@ -74,7 +74,7 @@ class LogicParenthesisMatching{
                     break;
                 case ']':
                     check=pop(s);
-                    if(check== '}' || check== ')')
+                    if(check== '{' || check== '(')
                         return false;
                     break;
             }
@@ -90,13 +90,13 @@ public class ParenthesisMatching {
         sp.top=-1;
         sp.size = 100;
         sp.arr = new char[sp.size];
-        String exp = "{{(()}}";
+        String exp = "{{(())}}";
         LogicParenthesisMatching s = new LogicParenthesisMatching();
         if(s.parenthesisMatching(sp, exp)){
-            System.out.println("Yes! It brackets are balanced");
+            System.out.println("Yes! The brackets set is balanced");
         }
         else {
-            System.out.println("The brackets are not balanced");
+            System.out.println("The brackets set is not balanced");
         }
     }
 
