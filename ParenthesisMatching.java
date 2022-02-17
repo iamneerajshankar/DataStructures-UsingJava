@@ -56,37 +56,30 @@ class LogicParenthesisMatching{
             char x = exp.charAt(i);
             if(x=='(' || x=='{' || x=='['){
                 push(s, x);
+                continue;
             }
+            if (isEmpty(s))
+                return false;
             char check;
-            if(x==')'){
-                check = pop(s);
-                if(check=='}' || check==']'){
-                    return false;
-                }
-                break;
+            switch(x){
+                case ')':
+                    check =pop(s);
+                    if(check == '{' || check==']')
+                        return false;
+                    break;
+                case '}':
+                    check=pop(s);
+                    if(check=='(' || check=='[')
+                        return false;
+                    break;
+                case ']':
+                    check=pop(s);
+                    if(check== '}' || check== ')')
+                        return false;
+                    break;
             }
-            if(x=='}'){
-                check = pop(s);
-                if(check==')' || check==']') {
-                    return false;
-                }
-                break;
-            }
-            if(x==']'){
-                check = pop(s);
-                if(check=='}' || check==']') {
-                    return false;
-                }
-                break;
-            }
-
         }
-        if(isEmpty(s)){
-            return true; // that is brackets set is balanced
-        }
-        else{
-            return false; // that is the brackets set is not balanced
-        }
+        return isEmpty(s);
     }
 }
 
@@ -97,13 +90,13 @@ public class ParenthesisMatching {
         sp.top=-1;
         sp.size = 100;
         sp.arr = new char[sp.size];
-        String exp = "{{(sp))}}";
+        String exp = "{{(()}}";
         LogicParenthesisMatching s = new LogicParenthesisMatching();
         if(s.parenthesisMatching(sp, exp)){
-            System.out.println("Yes! It is matching");
+            System.out.println("Yes! It brackets are balanced");
         }
         else {
-            System.out.println("Not matching");
+            System.out.println("The brackets are not balanced");
         }
     }
 
